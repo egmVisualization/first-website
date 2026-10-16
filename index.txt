@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h1>My name is Bowie Babovic Garcia</h1>
+    <p>
+      My name is Bowie, and I enjoy annoying my alphas and reaping the rewards
+      thereof. My hobbies include:
+      <ul>
+      <li>Reading</li>
+      <li>Cooking</li>
+      <li>Yoga</li>
+      </ul>
+    </p>
+    <p> My three favorite movies are:
+      <ol>
+        <li>Eternal Sunshine of teh Spotless Mind</li>
+        <li>The Godfather</li>
+        <li>Anything by Wes Anderson</li>
+      </ol>
+    </p>
+    <p>My favorite website is <a href="https://theimpactarchitects.com">Impact Architects</a>
+    </p>
+  <p>Finally,  here's a sweet image.<br>
+  <img 
+  src="https://picsum.photos/300/200"
+  alt="Sweet Sankey"
+  width="300"
+  height="200"
+/>
+</p>
+  </body>
+</html>
