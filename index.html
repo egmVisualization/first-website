@@ -16,15 +16,91 @@
         <li>The most recent releases at The Little Theatre</li>
       </ol>
     </p>
-    <p>My favorite website is <a href="https://theimpactarchitects.com">Impact Architects</a>
+    <p>My favorite website is <a href="https://theimpactarchitects.com">Impact Architects</a>.
     </p>
-  <p>Finally,  here's a sweet image.<br>
-  <img 
-  src="proportion-plot.png"
-  alt="This proportion plot has an insight"
-  width="600"
-  height="300"
-/>
-</p>
-  </body>
+  
+    <html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My first D3 bar chart</title>
+ 
+  <!-- PIECE 1: Load D3 from a CDN (a public server that hosts the library) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+  <style>
+    body {
+      font-family: Georgia, serif;
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    .bar { fill: #006a91; }
+    .bar:hover { fill: #c7b894; }
+    #chart text { font-family: 'Trebuchet MS', sans-serif; font-size: 14px; }
+  </style>
+ 
+  <h1>My first D3 column chart</h1>
+ 
+  <!-- PIECE 2: An empty box where D3 will draw the chart -->
+  <div id="chart"></div>
+ 
+ 
+  <!-- PIECE 3: The JavaScript that draws the chart -->
+  <script>
+    // The data: a list [ ] of rows, each row a set of labeled values { }
+    const data = [
+      { name: "A", value: 1 },
+      { name: "B", value: 5 },
+      { name: "C", value: 8 },
+      { name: "D", value: 10 }
+    ];
+ 
+    // Chart size and the space around it (room for the axis labels)
+    const width = 500;
+    const height = 300;
+    const margin = { top: 30, right: 20, bottom: 40, left: 40 };
+ 
+    // Create the drawing canvas (an SVG) inside the empty #chart box
+    const svg = d3.select("#chart")
+      .append("svg")
+      .attr("width", width)
+      .attr("height", height);
+ 
+    // X scale: turns each name (A, B, C, D) into a horizontal position
+    const x = d3.scaleBand()
+      .domain(data.map(d => d.name))
+      .range([margin.left, width - margin.right])
+      .padding(0.2);
+ 
+    // Y scale: turns each value (0 to 10) into a vertical position
+    const y = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d.value)])
+      .range([height - margin.bottom, margin.top]);
+ 
+    // Draw one rectangle per row of data
+    svg.selectAll("rect")
+      .data(data)
+      .join("rect")
+      .attr("class", "bar")
+      .attr("x", d => x(d.name))
+      .attr("y", d => y(d.value))
+      .attr("width", x.bandwidth())
+      .attr("height", d => y(0) - y(d.value));
+      svg.selectAll(".label")
+  .data(data)
+  .join("text")
+  .attr("class", "label")
+  .attr("x", d => x(d.name) + x.bandwidth() / 2)
+  .attr("y", d => y(d.value) - 8)
+  .attr("text-anchor", "middle")
+  .text(d => d.value);
+ 
+    // Add the bottom axis (the names)
+   svg.append("g")
+      .attr("transform", `translate(0, ${height - margin.bottom})`)
+      .call(d3.axisBottom(x).tickSize(0).tickPadding(10));
+
+  </script>
+ 
+</body>
 </html>
